@@ -30,5 +30,5 @@ npx expo login
 4\. Start the react-native development server
 
 ```terminal
-npm expo start
+npx expo start
 ```
