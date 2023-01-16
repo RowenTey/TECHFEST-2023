@@ -14,7 +14,6 @@ export default function Navigation() {
 				initialRouteName="BottomBar"
 				// screenOptions={{ headerShown: false }}
 			>
-				{/* <Stack.Screen name="Home" component={Home} /> */}
 				<Stack.Screen name="BottomBar" component={BottomBar} />
 			</Stack.Navigator>
 		</NavigationContainer>
@@ -37,9 +36,8 @@ function BottomBar() {
 			})}
 			initialRouteName={Home}
 		>
-			<Tab.Screen name="Home" component={Home} />
 			<Tab.Screen name="Map" component={Home} />
-			<Tab.Screen name="Report" component={Home} />
+			<Tab.Screen name="Home" component={Home} />
 			<Tab.Screen name="Profile" component={Profile} />
 		</Tab.Navigator>
 	);
