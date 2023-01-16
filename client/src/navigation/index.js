@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
+import Auth from "../screens/Auth";
 
 export default function Navigation() {
 	const Stack = createNativeStackNavigator();
@@ -12,16 +13,17 @@ export default function Navigation() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator
-				initialRouteName="BottomBar"
+				initialRouteName="Auth"
 				screenOptions={{ headerShown: false }}
 			>
-				<Stack.Screen name="BottomBar" component={BottomBar} />
+				<Stack.Screen name="HomeTab" component={HomeTab} />
+				<Stack.Screen name="Auth" component={Auth} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
 }
 
-function BottomBar() {
+function HomeTab() {
 	const Tab = createBottomTabNavigator();
 
 	return (
@@ -40,10 +42,10 @@ function BottomBar() {
 
 					return <Ionicons name={iconName} size={size} color={color} />;
 				},
-				tabBarActiveTintColor: "black",
+				tabBarActiveTintColor: "#3B82F6",
 				tabBarInactiveTintColor: "white",
-				tabBarActiveBackgroundColor: "#add8e6",
-				tabBarInactiveBackgroundColor: "#00008b",
+				tabBarActiveBackgroundColor: "#fff",
+				tabBarInactiveBackgroundColor: "#3B82F6",
 				headerShown: false,
 				tabBarShowLabel: true,
 			})}

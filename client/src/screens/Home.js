@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { useState, useRef } from "react";
 import { Camera, CameraType } from "expo-camera";
-import CustomModal from "../components/CustomModal";
+import ReportModal from "../components/ReportModal";
 
 export default function Home() {
 	const camera = useRef(null);
@@ -41,7 +41,6 @@ export default function Home() {
 	async function takePicture() {
 		try {
 			const photo = await camera.current.takePictureAsync();
-			console.log(photo);
 			setPreviewVisible(true);
 			setCapturedImage(photo);
 		} catch (error) {
@@ -49,7 +48,7 @@ export default function Home() {
 		}
 	}
 
-	function savePhoto(photo) {
+	function makeReport(photo) {
 		setVisible(true);
 	}
 
@@ -60,25 +59,32 @@ export default function Home() {
 
 	function closeModal() {
 		setVisible(false);
+		retakePicture();
 	}
 
 	return (
 		<View className="flex-1 justify-center">
-			<CustomModal modalVisible={visible} closeModal={closeModal} />
+			<ReportModal
+				modalVisible={visible}
+				closeModal={closeModal}
+				photo={capturedImage}
+			/>
 			{capturedImage && previewVisible ? (
 				<CameraPreview
 					photo={capturedImage}
-					savePhoto={savePhoto}
+					makeReport={makeReport}
 					retakePicture={retakePicture}
 				/>
 			) : (
 				<Camera className="flex-1 items-center" type={type} ref={camera}>
 					<View className="w-1/2 flex-1 flex-row m-16">
 						<TouchableOpacity
-							className="flex-1 self-end items-center bg-white rounded-full border-white border-6 p-3 w-2"
+							className="flex-1 self-end items-center bg-white rounded-full p-3 w-2"
 							onPress={takePicture}
 						>
-							<Text>Take picture</Text>
+							<Text className="text-blue-500 font-extrabold text-lg">
+								Take picture
+							</Text>
 						</TouchableOpacity>
 					</View>
 				</Camera>
@@ -87,25 +93,24 @@ export default function Home() {
 	);
 }
 
-function CameraPreview({ photo, retakePicture, savePhoto }) {
-	console.log("photo", photo);
+function CameraPreview({ photo, retakePicture, makeReport }) {
 	return (
 		<View className="bg-transparent flex-1 w-full h-full">
 			<ImageBackground source={{ uri: photo && photo.uri }} className="flex-1">
 				<View className="flex-1 flex-col p-3 justify-end">
-					<View className="flex-row p-3 justify-between">
+					<View className="flex-row py-3 px-5 justify-between">
 						<TouchableOpacity
 							onPress={retakePicture}
-							className="w-auto h-auto items-center rounded"
+							className="w-auto h-auto items-center rounded-full bg-white p-3"
 						>
-							<Text className="text-white text-base">Re-take</Text>
+							<Text className="text-black text-base font-bold">Re-take</Text>
 						</TouchableOpacity>
 
 						<TouchableOpacity
-							onPress={savePhoto}
-							className="w-auto h-auto items-center rounded"
+							onPress={makeReport}
+							className="w-auto h-auto items-center rounded-full bg-white p-3"
 						>
-							<Text className="text-white text-base">Save photo</Text>
+							<Text className="text-black text-base font-bold">Continue</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
