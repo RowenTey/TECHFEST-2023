@@ -1,9 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
+import Auth from "../screens/Auth";
 
 export default function Navigation() {
 	const Stack = createNativeStackNavigator();
@@ -11,35 +13,46 @@ export default function Navigation() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator
-				initialRouteName="BottomBar"
-				// screenOptions={{ headerShown: false }}
+				initialRouteName="Auth"
+				screenOptions={{ headerShown: false }}
 			>
-				{/* <Stack.Screen name="Home" component={Home} /> */}
-				<Stack.Screen name="BottomBar" component={BottomBar} />
+				<Stack.Screen name="HomeTab" component={HomeTab} />
+				<Stack.Screen name="Auth" component={Auth} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
 }
 
-function BottomBar() {
+function HomeTab() {
 	const Tab = createBottomTabNavigator();
 
 	return (
 		<Tab.Navigator
-			screenOptions={() => ({
-				tabBarActiveTintColor: "orange",
-				tabBarInactiveTintColor: "gray",
-				tabBarActiveBackgroundColor: "#ffffff",
-				tabBarInactiveBackgroundColor: "#000000",
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
+
+					if (route.name === "Home") {
+						iconName = focused ? "home" : "home-outline";
+					} else if (route.name === "Map") {
+						iconName = focused ? "map" : "map-outline";
+					} else if (route.name === "Profile") {
+						iconName = focused ? "people" : "people-outline";
+					}
+
+					return <Ionicons name={iconName} size={size} color={color} />;
+				},
+				tabBarActiveTintColor: "#3B82F6",
+				tabBarInactiveTintColor: "white",
+				tabBarActiveBackgroundColor: "#fff",
+				tabBarInactiveBackgroundColor: "#3B82F6",
 				headerShown: false,
 				tabBarShowLabel: true,
-				tabBarHideOnKeyboard: true,
 			})}
-			initialRouteName={Home}
+			initialRouteName="Home"
 		>
+			<Tab.Screen name="Map" component={Profile} />
 			<Tab.Screen name="Home" component={Home} />
-			<Tab.Screen name="Map" component={Home} />
-			<Tab.Screen name="Report" component={Home} />
 			<Tab.Screen name="Profile" component={Profile} />
 		</Tab.Navigator>
 	);
