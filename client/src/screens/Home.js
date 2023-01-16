@@ -7,21 +7,23 @@ import {
 } from "react-native";
 import { useState, useRef } from "react";
 import { Camera, CameraType } from "expo-camera";
+import CustomModal from "../components/CustomModal";
 
 export default function Home() {
 	const camera = useRef(null);
 	const [type, setType] = useState(CameraType.back);
 	const [capturedImage, setCapturedImage] = useState(null);
 	const [previewVisible, setPreviewVisible] = useState(false);
+	const [visible, setVisible] = useState(false);
 	const [permission, requestPermission] = Camera.useCameraPermissions();
 
+	// Camera permissions are still loading
 	if (!permission) {
-		// Camera permissions are still loading
 		return <View />;
 	}
 
+	// Camera permissions are not granted yet
 	if (!permission.granted) {
-		// Camera permissions are not granted yet
 		return (
 			<View className="flex-1 items-center justify-center bg-white">
 				<Text>We need your permission to show the camera</Text>
@@ -47,15 +49,22 @@ export default function Home() {
 		}
 	}
 
-	function savePhoto(photo) {}
+	function savePhoto(photo) {
+		setVisible(true);
+	}
 
 	function retakePicture() {
 		setCapturedImage(null);
 		setPreviewVisible(false);
 	}
 
+	function closeModal() {
+		setVisible(false);
+	}
+
 	return (
 		<View className="flex-1 justify-center">
+			<CustomModal modalVisible={visible} closeModal={closeModal} />
 			{capturedImage && previewVisible ? (
 				<CameraPreview
 					photo={capturedImage}
@@ -63,13 +72,13 @@ export default function Home() {
 					retakePicture={retakePicture}
 				/>
 			) : (
-				<Camera className="flex-1" type={type} ref={camera}>
-					<View className="flex-1 flex-row bg-transparent m-16">
+				<Camera className="flex-1 items-center" type={type} ref={camera}>
+					<View className="w-1/2 flex-1 flex-row m-16">
 						<TouchableOpacity
-							className="flex-1 self-end items-center"
+							className="flex-1 self-end items-center bg-white rounded-full border-white border-6 p-3 w-2"
 							onPress={takePicture}
 						>
-							<Text className="text-white">Take picture</Text>
+							<Text>Take picture</Text>
 						</TouchableOpacity>
 					</View>
 				</Camera>
