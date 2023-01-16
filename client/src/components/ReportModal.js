@@ -13,15 +13,10 @@ import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebaseConfig";
 import { UserContext } from "../context/user";
-import { decode } from "base-64";
-
-if (typeof atob === "undefined") {
-	global.atob = decode;
-}
+import uuid from "react-native-uuid";
 
 export default function ReportModal({ modalVisible, closeModal, photo }) {
 	const [user, setUser] = useContext(UserContext);
-	const [url, setURL] = useState("");
 
 	const [text, setText] = useState("");
 
@@ -47,7 +42,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 		setOpenCategory(false);
 	}, []);
 
-	async function uploadImageAsync(uri) {
+	async function uploadImageAsync(uri, id) {
 		const blob = await new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function () {
@@ -62,7 +57,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 			xhr.send(null);
 		});
 
-		const imageRef = ref(storage, "images/report4");
+		const imageRef = ref(storage, `images/${id}`);
 		uploadBytes(imageRef, blob).then((snapshot) => {
 			console.log("Uploaded a blob!");
 		});
@@ -70,8 +65,9 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 	}
 
 	async function onSubmit() {
+		const reportID = uuid.v4();
 		try {
-			const docRef = await setDoc(doc(db, "report"), {
+			const docRef = await setDoc(doc(db, "report", reportID), {
 				reportedDate: new Date(),
 				reporterID: user.uid,
 				category: category,
@@ -79,7 +75,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 				description: text,
 				verified: false,
 			});
-			await uploadImageAsync(photo.uri);
+			await uploadImageAsync(photo.uri, reportID);
 			console.log("Document written with ID: ", docRef.id);
 			closeModal();
 		} catch (e) {
