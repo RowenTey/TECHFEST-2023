@@ -1,4 +1,5 @@
 import { LogBox } from "react-native";
+import { ReportProvider } from "./context/report";
 
 import { UserProvider } from "./context/user";
 import Navigation from "./navigation";
@@ -10,7 +11,9 @@ export default function App() {
 
 	return (
 		<UserProvider>
-			<Navigation />
+			<ReportProvider>
+				<Navigation />
+			</ReportProvider>
 		</UserProvider>
 	);
 }

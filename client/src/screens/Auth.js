@@ -25,7 +25,7 @@ export default function Auth({ navigation }) {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				console.log(user);
+				// console.log(user);
 				setUser(user);
 				navigation.navigate("HomeTab");
 			}
@@ -64,6 +64,7 @@ export default function Auth({ navigation }) {
 			const docRef = await setDoc(doc(db, "users", user.uid), {
 				username: username,
 				email: user.email,
+				walletAddress: "",
 			});
 			console.log("Document written with ID: ", docRef);
 		} catch (e) {

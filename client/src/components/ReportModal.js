@@ -7,6 +7,7 @@ import {
 	TextInput,
 	Keyboard,
 	Platform,
+	Alert,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { doc, setDoc } from "firebase/firestore";
@@ -58,7 +59,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 		});
 
 		const imageRef = ref(storage, `images/${id}`);
-		uploadBytes(imageRef, blob).then((snapshot) => {
+		uploadBytes(imageRef, blob).then(() => {
 			console.log("Uploaded a blob!");
 		});
 		blob.close();
@@ -67,7 +68,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 	async function onSubmit() {
 		const reportID = uuid.v4();
 		try {
-			const docRef = await setDoc(doc(db, "report", reportID), {
+			await setDoc(doc(db, "report", reportID), {
 				reportedDate: new Date(),
 				reporterID: user.uid,
 				category: category,
@@ -76,7 +77,7 @@ export default function ReportModal({ modalVisible, closeModal, photo }) {
 				verified: false,
 			});
 			await uploadImageAsync(photo.uri, reportID);
-			console.log("Document written with ID: ", docRef.id);
+			Alert("Report submitted successfully!");
 			closeModal();
 		} catch (e) {
 			console.error("Error adding document: ", e);

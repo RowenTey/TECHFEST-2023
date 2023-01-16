@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Auth from "../screens/Auth";
+import Forum from "../screens/Forum";
 
 export default function Navigation() {
 	const Stack = createNativeStackNavigator();
@@ -34,8 +35,8 @@ function HomeTab() {
 
 					if (route.name === "Home") {
 						iconName = focused ? "home" : "home-outline";
-					} else if (route.name === "Map") {
-						iconName = focused ? "map" : "map-outline";
+					} else if (route.name === "Forum") {
+						iconName = focused ? "chatbox" : "chatbox-outline";
 					} else if (route.name === "Profile") {
 						iconName = focused ? "people" : "people-outline";
 					}
@@ -51,7 +52,7 @@ function HomeTab() {
 			})}
 			initialRouteName="Home"
 		>
-			<Tab.Screen name="Map" component={Profile} />
+			<Tab.Screen name="Forum" component={Forum} />
 			<Tab.Screen name="Home" component={Home} />
 			<Tab.Screen name="Profile" component={Profile} />
 		</Tab.Navigator>
