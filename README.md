@@ -27,7 +27,7 @@ cd <FOLDER-NAME>
 2\. Clone the repo
 
 ```terminal
-git clone https://github.com/RowenTey/SC2006-OneStart.git
+git clone https://github.com/RowenTey/TECHFEST-2023.git
 ```
 
 3\. Go to project directory
@@ -36,7 +36,7 @@ git clone https://github.com/RowenTey/SC2006-OneStart.git
 cd TECHFEST-2023
 ```
 
-4\. Change directory to `client` or 
+4\. Change directory to `client` 
 
 ```terminal
 cd <PROJECT-PATH>
@@ -48,10 +48,8 @@ cd <PROJECT-PATH>
 
 ```terminal
 .
-├── deliverables         # lab deliverables
 ├── client               # react native app
-├── server               # go app
-├── .gitignore
+├── smart-contracts      # blockchain utilities
 ├── LICENSE
 └── README.md
 ```
