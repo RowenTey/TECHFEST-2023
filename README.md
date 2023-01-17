@@ -56,20 +56,19 @@ cd <PROJECT-PATH>
 
 ## 🧪 Tech Stack
 <p>
-  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" >
   <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" >
-  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" >
-  <img src="https://img.shields.io/badge/Google_Cloud-FF8552?style=for-the-badge&logo=google-cloud&logoColor=white" >
+  <img src="https://img.shields.io/badge/Solidity-e6e6e6?style=for-the-badge&logo=solidity&logoColor=black" >
+  <img src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" >
 </p>
 
-## 🧠 Contributors - Team OneStart 🏆🤟🏼
+<!-- ## 🧠 Contributors - Team OneStart 🏆🤟🏼
 
 - [@RowenTey](https://github.com/RowenTey)
 - [@czhi-heng](https://github.com/czhi-heng)
 - [@JULU909](https://github.com/JULU909)
 - [@Eldrick7](https://github.com/Eldrick7)
 - [@cplAloysius](https://github.com/cplAloysius)
-- [@amabellim](https://github.com/amabellim)
+- [@amabellim](https://github.com/amabellim) -->
 
 <!-- ## 📖 References
 
