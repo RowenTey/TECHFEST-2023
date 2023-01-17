@@ -90,8 +90,9 @@ function ForumPost({ report }) {
 	console.log(report);
 
 	return (
-		<View className="flex-row p-5 border-t-2 h-auto border-black gap-x-1">
+		<View className="flex-row items-center justify-between px-8 py-5 border-t-2 h-auto border-blue-500 gap-1">
 			<Image
+				className='m-0'
 				source={{
 					width: 50,
 					height: 50,
@@ -99,23 +100,19 @@ function ForumPost({ report }) {
 				}}
 			/>
 
-			<View className="flex-col justify-between gap-y-4 gap-x-6">
-				<View className="flex-row justify-between w-64 items-center px-1">
-					<View className="flex-col gap-y-2">
-						<Text>{category}</Text>
-						<Text>{location}</Text>
-						<Text>{description}</Text>
-					</View>
+			<View className="flex flex-col justify-start gap-2 w-[125px]">
+				<Text>{category}</Text>
+				<Text>{location}</Text>
+				<Text>{description}</Text>
+			</View>
 
-					<View className="flex-row items-center gap-x-1">
-						<MaterialCommunityIcons
-							name="arrow-up-bold"
-							size={35}
-							color="black"
-						/>
-						<Text>10</Text>
-					</View>
-				</View>
+			<View className="flex-row items-center gap-1">
+				<MaterialCommunityIcons
+					name="arrow-up-bold"
+					size={35}
+					color={'rgb(59 130 246)'}
+				/>
+				<Text>10</Text>
 
 				<Image source={{ uri: image }} />
 			</View>
